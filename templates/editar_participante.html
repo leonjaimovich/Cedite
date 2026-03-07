@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">Editar Participante</h2>
+
+<div class="card shadow-sm">
+<div class="card-body">
+
+<form method="POST">
+
+<div class="mb-3">
+<label>Apellido</label>
+<input type="text" name="apellido" class="form-control"
+value="{{participante.apellido}}">
+</div>
+
+<div class="mb-3">
+<label>Nombre</label>
+<input type="text" name="nombre" class="form-control"
+value="{{participante.nombre}}">
+</div>
+
+<div class="mb-3">
+<label>DNI</label>
+<input type="text" name="dni" class="form-control"
+value="{{participante.dni}}">
+</div>
+
+<div class="mb-3">
+<label>Email</label>
+<input type="email" name="email" class="form-control"
+value="{{participante.email}}">
+</div>
+
+<div class="d-flex justify-content-between">
+<a href="/participantes" class="btn btn-secondary">Volver</a>
+<button type="submit" class="btn btn-primary">Guardar cambios</button>
+</div>
+
+</form>
+
+</div>
+</div>
+
+{% endblock %}

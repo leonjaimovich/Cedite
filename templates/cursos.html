@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Cursos</h2>
+    <a href="/nuevo_curso" class="btn btn-success">
+        + Nuevo Curso
+    </a>
+</div>
+
+{% if eliminado %}
+
+<div class="alert alert-success">
+Curso eliminado correctamente.
+</div>
+{% endif %}
+
+{% if error %}
+
+<div class="alert alert-danger">
+No se puede eliminar el curso porque tiene ediciones asociadas.
+</div>
+{% endif %}
+
+<div class="card shadow-sm">
+<div class="card-body">
+
+<form method="GET" class="mb-3">
+<div class="input-group">
+
+<input
+type="text"
+name="buscar"
+class="form-control"
+placeholder="Buscar curso..."
+value="{{ request.args.get('buscar','') }}">
+
+<button class="btn btn-primary">Buscar</button>
+
+<a href="/cursos" class="btn btn-secondary">
+Limpiar
+</a>
+
+</div>
+</form>
+
+<table class="table table-hover align-middle">
+
+<thead class="table-dark">
+<tr>
+<th>ID</th>
+<th>Nombre del Curso</th>
+<th>Descripción</th>
+<th>Acciones</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for c in cursos %}
+
+<tr>
+
+<td>{{ c.id_curso }}</td>
+<td>{{ c.nombre_curso }}</td>
+<td>{{ c.descripcion }}</td>
+
+<td>
+
+<a href="/editar_curso/{{c.id_curso}}" class="btn btn-sm btn-primary">
+Editar
+</a>
+
+<a href="/eliminar_curso/{{c.id_curso}}"
+class="btn btn-sm btn-danger"
+onclick="return confirm('¿Eliminar curso?')">
+Eliminar </a>
+
+</td>
+
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+
+{% if not cursos %}
+
+<div class="alert alert-info text-center">
+No hay cursos registrados.
+</div>
+{% endif %}
+
+</div>
+</div>
+
+{% endblock %}

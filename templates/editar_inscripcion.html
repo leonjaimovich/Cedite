@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">Editar Inscripción</h2>
+
+<div class="card shadow-sm">
+<div class="card-body">
+
+<form method="POST">
+
+<div class="mb-3">
+<label>Participante</label>
+
+<select name="id_participante" class="form-select">
+
+{% for p in participantes %}
+
+<option value="{{p.id_participante}}"
+{% if p.id_participante == inscripcion.id_participante %}
+selected
+{% endif %}>
+
+{{p.apellido}} {{p.nombre}}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="mb-3">
+<label>Edición del curso</label>
+
+<select name="id_edicion" class="form-select">
+
+{% for e in ediciones %}
+
+<option value="{{e.id_edicion}}"
+{% if e.id_edicion == inscripcion.id_edicion %}
+selected
+{% endif %}>
+
+{{e.nombre_curso}} - {{e.anio}}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="d-flex justify-content-between">
+
+<a href="/inscripciones" class="btn btn-secondary">
+Volver
+</a>
+
+<button class="btn btn-primary">
+Guardar cambios
+</button>
+
+</div>
+
+</form>
+
+</div>
+</div>
+
+{% endblock %}

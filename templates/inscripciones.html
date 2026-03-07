@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Inscripciones</h2>
+    <a href="/nueva_inscripcion" class="btn btn-success">
+        + Nueva Inscripción
+    </a>
+</div>
+
+<div class="card shadow-sm">
+<div class="card-body">
+
+<form method="GET" class="mb-3">
+<div class="input-group">
+
+<input
+type="text"
+name="buscar"
+class="form-control"
+placeholder="Buscar alumno o curso..."
+value="{{ request.args.get('buscar','') }}">
+
+<button class="btn btn-primary">Buscar</button>
+
+<a href="/inscripciones" class="btn btn-secondary">
+Limpiar
+</a>
+
+</div>
+</form>
+
+<a href="/reporte_inscripciones" class="btn btn-danger mb-3">
+Descargar PDF
+</a>
+
+<table class="table table-hover align-middle">
+
+<thead class="table-dark">
+<tr>
+<th>ID</th>
+<th>Alumno</th>
+<th>Curso</th>
+<th>Año</th>
+<th>Fecha inscripción</th>
+<th>Acciones</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for i in inscripciones %}
+<tr>
+
+<td>{{ i.id_inscripcion }}</td>
+<td>{{ i.apellido }} {{ i.nombre }}</td>
+<td>{{ i.nombre_curso }}</td>
+<td>{{ i.anio }}</td>
+<td>{{ i.fecha_inscripcion }}</td>
+
+<td>
+
+<a href="/editar_inscripcion/{{i.id_inscripcion}}" class="btn btn-sm btn-primary">
+Editar
+</a>
+
+<a href="/eliminar_inscripcion/{{i.id_inscripcion}}"
+class="btn btn-sm btn-danger"
+onclick="return confirm('¿Eliminar inscripción?')">
+Eliminar
+</a>
+
+</td>
+
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+
+{% if not inscripciones %}
+<div class="alert alert-info text-center">
+No hay inscripciones registradas.
+</div>
+{% endif %}
+
+</div>
+</div>
+
+{% endblock %}

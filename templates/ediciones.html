@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Ediciones</h2>
+    <a href="/nueva_edicion" class="btn btn-success">
+        + Nueva Edición
+    </a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Curso</th>
+                    <th>Año</th>
+                    <th>Docente</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Cupo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in ediciones %}
+                <tr>
+                    <td>{{ e.id_edicion }}</td>
+                    <td>{{ e.nombre_curso }}</td>
+                    <td>{{ e.anio }}</td>
+                    <td>
+                        {% if e.apellido %}
+                            {{ e.apellido }}
+                        {% else %}
+                            <span class="text-muted">Sin asignar</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ e.fecha_inicio or "-" }}</td>
+                    <td>{{ e.fecha_fin or "-" }}</td>
+                    <td>{{ e.cupo_maximo or "-" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if not ediciones %}
+        <div class="alert alert-info text-center">
+            No hay ediciones registradas.
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

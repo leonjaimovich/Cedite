@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">Editar Curso</h2>
+
+<div class="card shadow-sm">
+<div class="card-body">
+
+<form method="POST">
+
+<div class="mb-3">
+<label>Nombre del curso</label>
+<input type="text" name="nombre_curso" class="form-control"
+value="{{curso.nombre_curso}}">
+</div>
+
+<div class="mb-3">
+<label>Descripción</label>
+<textarea name="descripcion" class="form-control">{{curso.descripcion}}</textarea>
+</div>
+
+<div class="mb-3">
+<label>Duración (horas)</label>
+<input type="number" name="duracion_horas" class="form-control"
+value="{{curso.duracion_horas}}">
+</div>
+
+<div class="d-flex justify-content-between">
+<a href="/cursos" class="btn btn-secondary">Volver</a>
+<button class="btn btn-primary">Guardar</button>
+</div>
+
+</form>
+
+</div>
+</div>
+
+{% endblock %}

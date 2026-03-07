@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Nuevo Curso</h2>
+
+<form method="POST">
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input type="text" name="nombre" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label>Descripción</label>
+        <textarea name="descripcion" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Duración (horas)</label>
+        <input type="number" name="duracion" class="form-control">
+    </div>
+
+    <button class="btn btn-success">Guardar</button>
+</form>
+
+{% endblock %}

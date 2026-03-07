@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Calificaciones</h2>
+    <a href="/nueva_calificacion" class="btn btn-success">
+        + Nueva Calificación
+    </a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+		
+		<a href="/reporte_calificaciones" class="btn btn-danger mb-3">
+		Descargar PDF
+		</a>
+
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Alumno</th>
+                    <th>Curso</th>
+                    <th>Año</th>
+                    <th>Nota</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for n in calificaciones %}
+                <tr>
+                    <td>{{ n.id_calificacion }}</td>
+                    <td>{{ n.apellido }} {{ n.nombre }}</td>
+                    <td>{{ n.nombre_curso }}</td>
+                    <td>{{ n.anio }}</td>
+                    <td>
+                        {% if n.nota_final %}
+                            {{ n.nota_final }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if n.aprobado == 1 %}
+                            <span class="badge bg-success">Aprobado</span>
+                        {% elif n.aprobado == 0 %}
+                            <span class="badge bg-danger">No Aprobado</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Sin cerrar</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if not calificaciones %}
+        <div class="alert alert-info text-center">
+            No hay calificaciones registradas.
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

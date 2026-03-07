@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row g-4">
+
+<div class="col-md-3">
+<div class="card text-white bg-primary shadow">
+<div class="card-body text-center">
+<h5>Participantes</h5>
+<h2>{{ participantes }}</h2>
+</div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card text-white bg-success shadow">
+<div class="card-body text-center">
+<h5>Cursos</h5>
+<h2>{{ cursos }}</h2>
+</div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card text-white bg-warning shadow">
+<div class="card-body text-center">
+<h5>Docentes</h5>
+<h2>{{ docentes }}</h2>
+</div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card text-white bg-danger shadow">
+<div class="card-body text-center">
+<h5>Inscripciones</h5>
+<h2>{{ inscripciones }}</h2>
+</div>
+</div>
+</div>
+
+</div>
+
+{% endblock %}

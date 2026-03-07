@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Docentes</h2>
+    <a href="/nuevo_docente" class="btn btn-success">
+        + Nuevo Docente
+    </a>
+</div>
+
+{% if eliminado %}
+
+<div class="alert alert-success">
+Docente eliminado correctamente.
+</div>
+{% endif %}
+
+{% if error %}
+
+<div class="alert alert-danger">
+No se puede eliminar el docente porque tiene ediciones asociadas.
+</div>
+{% endif %}
+
+<div class="card shadow-sm">
+<div class="card-body">
+
+<form method="GET" class="mb-3">
+<div class="input-group">
+
+<input
+type="text"
+name="buscar"
+class="form-control"
+placeholder="Buscar docente..."
+value="{{ request.args.get('buscar','') }}">
+
+<button class="btn btn-primary">Buscar</button>
+
+<a href="/docentes" class="btn btn-secondary">
+Limpiar
+</a>
+
+</div>
+</form>
+
+<table class="table table-hover align-middle">
+
+<thead class="table-dark">
+<tr>
+<th>ID</th>
+<th>Apellido</th>
+<th>Nombre</th>
+<th>Email</th>
+<th>Acciones</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for d in docentes %}
+
+<tr>
+
+<td>{{ d.id_docente }}</td>
+<td>{{ d.apellido }}</td>
+<td>{{ d.nombre }}</td>
+<td>{{ d.email }}</td>
+
+<td>
+
+<a href="/editar_docente/{{d.id_docente}}" class="btn btn-sm btn-primary">
+Editar
+</a>
+
+<a href="/eliminar_docente/{{d.id_docente}}"
+class="btn btn-sm btn-danger"
+onclick="return confirm('¿Eliminar docente?')">
+Eliminar </a>
+
+</td>
+
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+
+{% if not docentes %}
+
+<div class="alert alert-info text-center">
+No hay docentes registrados.
+</div>
+{% endif %}
+
+</div>
+</div>
+
+{% endblock %}

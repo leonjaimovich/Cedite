@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Participantes</h2>
+    <a href="/nuevo_participante" class="btn btn-success">
+        + Nuevo Participante
+    </a>
+</div>
+
+<div class="card shadow-sm">
+<div class="card-body">
+
+<!-- MENSAJES -->
+{% if eliminado %}
+<div class="alert alert-success">
+Participante eliminado correctamente.
+</div>
+{% endif %}
+
+{% if error %}
+<div class="alert alert-danger">
+No se puede eliminar el participante porque tiene inscripciones asociadas.
+</div>
+{% endif %}
+
+<!-- BUSCADOR -->
+<form method="GET" class="mb-3">
+<div class="input-group">
+
+<input
+type="text"
+name="buscar"
+class="form-control"
+placeholder="Buscar por apellido, nombre o DNI"
+value="{{ request.args.get('buscar','') }}">
+
+<button class="btn btn-primary">
+Buscar
+</button>
+
+<a href="/participantes" class="btn btn-secondary">
+Limpiar
+</a>
+
+</div>
+</form>
+
+<table class="table table-hover align-middle">
+
+<thead class="table-dark">
+<tr>
+<th>ID</th>
+<th>Apellido</th>
+<th>Nombre</th>
+<th>DNI</th>
+<th>Email</th>
+<th>Acciones</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for p in participantes %}
+
+<tr>
+
+<td>{{ p.id_participante }}</td>
+<td>{{ p.apellido }}</td>
+<td>{{ p.nombre }}</td>
+<td>{{ p.dni }}</td>
+<td>{{ p.email }}</td>
+
+<td>
+
+<a href="/editar_participante/{{p.id_participante}}" class="btn btn-sm btn-primary">
+Editar
+</a>
+
+<a href="/eliminar_participante/{{p.id_participante}}"
+class="btn btn-sm btn-danger"
+onclick="return confirm('¿Eliminar participante?')">
+Eliminar
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% if not participantes %}
+<div class="alert alert-info text-center">
+No hay participantes registrados.
+</div>
+{% endif %}
+
+</div>
+</div>
+
+{% endblock %}
