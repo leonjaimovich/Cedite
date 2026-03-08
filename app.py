@@ -5,15 +5,26 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from flask import Response
 import io
+import os
 
 app = Flask(__name__)
 
-def get_connection():
+#def get_connection():
+#    return mysql.connector.connect(
+       # host="localhost",
+       # user="root",
+       # password="a.0123456",
+       # database="cursos_cedite"
+
+#    )
+
+def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="a.0123456",
-        database="cursos_cedite"
+        host=os.environ.get('MYSQLHOST'),
+        user=os.environ.get('MYSQLUSER'),
+        password=os.environ.get('MYSQLPASSWORD'),
+        database=os.environ.get('MYSQLDATABASE'),
+        port=int(os.environ.get('MYSQLPORT', 3306))
     )
 
 @app.route("/")
