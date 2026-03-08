@@ -9,7 +9,7 @@ import os
 
 app = Flask(__name__)
 
-#def get_connection():
+#def get_db_connection():
 #    return mysql.connector.connect(
        # host="localhost",
        # user="root",
@@ -61,7 +61,7 @@ def index():
 @app.route("/participantes")
 def participantes():
 
-    conexion = get_connection()
+    conexion = get_db_connection()
     cursor = conexion.cursor(dictionary=True)
 
     buscar = request.args.get("buscar")
@@ -102,7 +102,7 @@ def nuevo_participante():
         dni = request.form["dni"]
         email = request.form["email"]
 
-        conn = get_connection()
+        conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute("""
             INSERT INTO participantes (apellido, nombre, dni, email)
@@ -144,7 +144,7 @@ def editar_participante(id):
 @app.route('/eliminar_participante/<int:id>')
 def eliminar_participante(id):
 
-    conexion = get_connection()
+    conexion = get_db_connection()
     cursor = conexion.cursor()
 
     try:
@@ -174,7 +174,7 @@ def cursos():
     eliminado = request.args.get("eliminado")
     error = request.args.get("error")
 
-    conexion = get_connection()
+    conexion = get_db_connection()
     cursor = conexion.cursor(dictionary=True)
 
     query = """
@@ -247,7 +247,7 @@ import mysql.connector
 @app.route('/eliminar_curso/<int:id>')
 def eliminar_curso(id):
 
-    conexion = get_connection()
+    conexion = get_db_connection()
     cursor = conexion.cursor()
 
     try:
@@ -275,7 +275,7 @@ def docentes():
     eliminado = request.args.get("eliminado")
     error = request.args.get("error")
 
-    conexion = get_connection()
+    conexion = get_db_connection()
     cursor = conexion.cursor(dictionary=True)
 
     query = """
@@ -347,7 +347,7 @@ def editar_docente(id):
 @app.route('/eliminar_docente/<int:id>')
 def eliminar_docente(id):
 
-    conexion = get_connection()
+    conexion = get_db_connection()
     cursor = conexion.cursor()
 
     try:
@@ -643,7 +643,7 @@ def reporte_calificaciones():
 
     
 def query_db(query, params=None, fetch=False):
-    conn = get_connection()
+    conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute(query, params or ())
     
